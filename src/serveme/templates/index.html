@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<section class="section ">
+  <div class="container ">
+    <!-- <h3 class="title has-text-centered is-size-4">Services</h3> -->
+      <div class="columns  is-multiline is-variable is-5">
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services', service='appliances') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='appliances.png')}}" alt="placeholder" >
+              </div>
+              <div class="card-content">
+                <p>Appliances</p>
+              </div>
+            </div>
+          </a>
+          </div>
+
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services', service='cleaning') }}">
+            <div class="card ">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='cleaning.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Cleaning</p>
+              </div>
+            </div>
+            </a>
+          </div>
+
+          <div class="column  is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services',service='computer') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='computerRepair.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Computer</p>
+              </div>
+            </div>
+          </a>
+          </div>
+
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services',service='electrical') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='electrical.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Electrical</p>
+              </div>
+            </div>
+            </a>
+          </div>
+
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services',service='moving') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='moving.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Moving</p>
+              </div>
+            </div>
+          </a>
+          </div>
+
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services',service='painting') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='painting.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Painting</p>
+              </div>
+            </div>
+            </a>
+          </div>
+
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services',service='pest_control') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='pestControl.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Pest Control</p>
+              </div>
+            </div>
+            </a>
+          </div>
+
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services',service='plumbing') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='plumbing.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Plumbing</p>
+              </div>
+            </div>
+            </a>
+          </div>
+
+          <div class="column is-3-tablet is-4-desktop">
+            <a href="{{ url_for('main.services', service='tutoring') }}">
+            <div class="card">
+              <div class="card-image hast-text-centered px-6">
+                <img src="{{url_for('static', filename='tutoring.png')}}" alt="placeholder">
+              </div>
+              <div class="card-content">
+                <p>Tutoring</p>
+              </div>
+            </div>
+            </a>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+<!-- <img src="{{url_for('static', filename='appliances.png')}}" alt="placeholder"> -->
+
+{% endblock %}

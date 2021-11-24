@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-8 is-offset-2">
+    <h1 class ="title">
+    </h1>
+	<div class="box">
+	    <form method="POST" action="/search">
+            <div class="field">
+                <div class="form-group">
+                    <input type="text" id="fname" name="fname" size="20" placeholder="Name">
+                    <input type="text" id="fname" name="fname" size="20" placeholder="Address">
+                    <select class =center large name = "stars" id="stars">
+                        <option value="" disabled selected>Rating</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button class="button">Search</button>
+                   
+                </div>
+            </div>
+        </form>  
+	</div>
+</div>
+
+
+  <!-- {{result}} -->
+  <div class="container ">
+    <div class="columns  is-multiline is-variable is-5">
+{% for service in result %}
+  <div class="column is-3-tablet is-4-desktop">
+    <a href="{{ url_for('main.providers', provider_id=service.provider_id ,service_id=service.service_id) }}">
+        <div class="card">
+            
+            <div class="card-content">
+            <p>{{service.service_name}}</p>
+            <br>
+            <p>{{service.description}}</p>
+            
+            <hr> 
+            <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
+           {{service.rating_avg}}
+           <br>
+        
+            <p>Cost : ${{service.cost}}</p>   
+           
+            </div>
+        </div>
+    </a>
+    </div>
+{% endfor %}
+</div>
+</div>
+
+
+
+{% endblock %}

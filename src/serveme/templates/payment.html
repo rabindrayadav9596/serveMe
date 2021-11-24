@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<br>
+<br>
+
+
+
+ <div class="columns is-1">
+    <div class="column is-3-tablet is-4-desktop">
+        <div class="box"> 
+            <p>Payment options</p>
+            <br>
+            <div class="control">
+                <label class="radio">
+                  <input type="radio" checked >
+                  Credit & Debit Cards
+                </label>
+                <hr>
+                <div class="field">
+                    <label class="label is-small">First Name</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input"  >
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label is-small">Last Name</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input"  >
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label is-small">Card Number</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input"  >
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label is-small">Expiration Date</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input" placeholder="MM/YY" >
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label is-small">Security Code</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input"  >
+                    </div>
+                </div>
+
+              
+                <br>
+                <br>
+                <label class="radio">
+                  <input type="radio"  >
+                  Paypal
+                </label>
+              </div>
+            <br>
+        </div>
+    </div>
+   
+    <br>
+    <hr>
+   
+    <div class="column is-3-tablet is-4-desktop">
+        <div class="box">
+              <p>Use bonus points</p>
+              <br>
+              <p>Service fee</p>
+              <hr>
+              <p>Total</p>
+              <br>
+              <button class="button is-success">Confirm and Pay</button>
+            <br>      
+        </div>
+       
+    </div>
+    
+  
+</div>
+
+
+
+
+
+{% endblock %}

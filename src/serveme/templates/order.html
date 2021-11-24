@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<br>
+<br>
+
+
+{%if providers != null%}
+ <div class="columns is-1">
+    <div class="column is-3-tablet is-4-desktop">
+        <div class="box"> 
+            <h1>Provider description</h1>
+            <hr>
+            <p style="text-align:center">Name : {{providers[0].provider_name}}</p>
+            <br>
+            <p>Rating : {{providers[0].rating_avg}}</p>
+            <br>
+            <p>Phone number :{{providers[0].phone_number}}</p>
+            <br>
+            <p>Address : {{providers[0].address}}</p>
+            <br>
+            <p>Email : {{providers[0].email}}</p>
+            <br>
+        </div>
+    </div>
+   
+    <div class="column is-3-tablet is-4-desktop">
+        <div class="box"> 
+            <p>Choose date and time</p>
+            <br>
+            <input type="date">
+            
+            <br>
+            <br>
+            <input type="time">
+            <br>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    {% if services != null %}
+    <div class="column is-3-tablet is-4-desktop">
+        <div class="box">
+            <h1> <strong>Place Order</strong> </h1>
+            <hr>
+            <h1>Price summary</h1>
+            <br>
+            <p>Subtotal : ${{services[0].cost}}</p>
+            <br>
+            <p>Tax : ${{0.08 * services[0].cost}}</p>
+            <br>
+            <p>Total : ${{0.08*services[0].cost + services[0].cost}} </p>
+            <br>
+            <a href="{{ url_for('main.payment') }}">
+            <button class="button is-success">Continue to checkout</button>
+            </a>
+            <br>      
+        </div>
+        {%endif%}
+    </div>
+    
+  
+</div>
+{%endif%}
+    
+
+
+
+
+{% endblock %}

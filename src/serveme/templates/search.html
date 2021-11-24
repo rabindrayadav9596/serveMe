@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-8 is-offset-2">
+    <h1 class ="title">
+	Enter keywords and minimum rating
+    </h1>
+	<div class="box">
+	    <form method="POST" action="/search">
+		<div class="field">
+                    <div class="form-group">
+                	<input class="input is-large" type="text" name="searchInput" placeholder=" " autofocus="">
+                    </div>
+                </div>
+		<div class="field">
+		    <div class="form-group">	
+			    <select class =center large name = "stars" id="stars">
+				<option value="" disabled selected>Select minimum stars</option>
+   				<option>1</option>
+   				<option>2</option>
+   				<option>3</option>
+   				<option>4</option>
+   				<option>5</option>
+			    </select>
+		    </div>
+	        </div>
+		<button class="button is-block is-info is-large is-fullwidth">Search</button>
+	     </form>
+	</div>
+</div>
+{% endblock %}
