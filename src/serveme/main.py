@@ -76,6 +76,11 @@ def order_history():
     services = Service.query.all()
     return render_template('order_history.html', orders=orders, services=services)
 
+@main.route('/settings')
+def settings():
+    return render_template('settings.html')
+    
+
 @main.route('/profile')
 @login_required
 def profile():
