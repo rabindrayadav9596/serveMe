@@ -9,8 +9,8 @@
 
 
 {%if providers != null%}
- <div class="columns is-1">
-    <div class="column is-3-tablet is-4-desktop">
+ <div style="display: flex; flex-direction: horizontal; margin-left:20%;">
+    <div >
         <div class="box"> 
             <h1>Provider description</h1>
             <hr>
@@ -26,49 +26,58 @@
             <br>
         </div>
     </div>
-   
-    <div class="column is-3-tablet is-4-desktop">
-        <div class="box"> 
-            <p>Choose date and time</p>
-            <br>
-            <input type="date">
-            
-            <br>
-            <br>
-            <input type="time">
-            <br>
-        </div>
-    </div>
 
-    <br>
-    <hr>
-    {% if services != null %}
-    <div class="column is-3-tablet is-4-desktop">
-        <div class="box">
-            <h1> <strong>Place Order</strong> </h1>
-            <hr>
-            <h1>Price summary</h1>
-            <br>
-            <p>Subtotal : ${{services[0].cost}}</p>
-            <br>
-            <p>Tax : ${{0.08 * services[0].cost}}</p>
-            <br>
-            <p>Total : ${{0.08*services[0].cost + services[0].cost}} </p>
-            <br>
-            <a href="{{ url_for('main.payment') }}">
-            <button class="button is-success">Continue to checkout</button>
-            </a>
-            <br>      
-        </div>
-        {%endif%}
-    </div>
+
+    <form method="POST" action="{{ url_for('main.order',cost=services[0].cost, provider_id=services[0].provider_id ,service_id=services[0].service_id, description=services[0].description) }}">
+            <div style="display: flex; flex-direction: horizontal;">
+
+                <div class="box" style="margin-left:10%"> 
+                    <p>Choose date and time</p>
+                   
+                    <hr>
+                    <div class="field">
+                        <div class="control">
+                            
+                            <input type="date" name="date">
+                        </div>
+                    </div>
     
-  
+                    <div class="field">
+                        <div class="control">
+                            <input type="time" name="time">
+                        </div>
+                    </div>
+
+
+                </div>
+    
+                {% if services != null %}
+                <div  class="box" style="margin-left: 10%;" >
+                    <h1> <strong>Place Order</strong> </h1>
+                    <hr>
+                    <h1>Price summary</h1>
+                    <br>
+                    <p>Subtotal : ${{services[0].cost}}</p>
+                    <br>
+                    <p>Tax : ${{0.08 * services[0].cost}}</p>
+                    <br>
+                    <p>Total : ${{0.08*services[0].cost + services[0].cost}} </p>
+                    <br>
+
+                    <button class="button is-success">Continue to checkout</button>
+                    <br>      
+                </div>
+                {%endif%}
+    
+
+            </div>
+           
+    </form>
+
 </div>
 {%endif%}
+
+
     
-
-
-
 
 {% endblock %}

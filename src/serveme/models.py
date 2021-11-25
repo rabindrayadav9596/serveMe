@@ -14,22 +14,25 @@ class User (UserMixin, db.Model):
     gender          = db.Column(db.String(20))
     age             = db.Column(db.Integer, nullable=False)
     phoneNum    = db.Column(db.String(10), nullable=False)
+    points     = db.Column(db.Integer, nullable=False)
     #reviews         = db.relationship('Review', backref='author', lazy=True)
     
     def __repr__(self):
         return 'String representation of user'
     
 
-class PastOrder (db.Model):
-    provider_id     = db.Column(db.Integer, nullable=False, primary_key=True)
+class Order (db.Model):
+    order_id        = db.Column(db.Integer, primary_key=True)
+    provider_id     = db.Column(db.Integer, nullable=False)
     service_id      = db.Column(db.Integer, nullable=False)
     userID         = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
     cost            = db.Column(db.Float(precision=2), nullable=False)
     review_id       = db.Column(db.Integer)
     description     = db.Column(db.String(255))
+    date            = db.Column(db.DateTime())
     
     def __repr__(self):
-        return 'String representation of Past Order'
+        return f'{self.order_id}-{self.provider_id}-{self.service_id}-{self.userID} - {self.cost} - {self.review_id} - {self.description} - {self.date} '
     
 class Review (db.Model):
     review_id       = db.Column(db.Integer, primary_key=True)

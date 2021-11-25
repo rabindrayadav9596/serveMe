@@ -3,5 +3,14 @@
 {% block content %}
 <h1>
   Welcome, {{ name }}!
+  <br>
+  <br>
+  <hr>
+
+  <a href="{{ url_for('main.order_history' )}}">
+    <button class="button">Order History</button>
+    </a>
+  
+
 </h1>
 {% endblock %}

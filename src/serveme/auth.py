@@ -44,6 +44,7 @@ def signup_post():
     phoneNum = request.form.get('phoneNum')
     userID= uuid.uuid4().hex
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+    points = 0
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
         flash('Email address already exists')
@@ -51,7 +52,7 @@ def signup_post():
 
     # create a new user with the form data. Hash the password so the    plaintext version isn't saved.
     # gender=gender, age=age, phone_number=phone_number
-    new_user = User( userID=userID, email=email, name=name, password=generate_password_hash(password, method='sha256'),gender=gender,age=age, phoneNum=phoneNum)
+    new_user = User( userID=userID, email=email, name=name, password=generate_password_hash(password, method='sha256'),gender=gender,age=age, phoneNum=phoneNum, points=points)
 
     # add the new user to the database
     db.session.add(new_user)

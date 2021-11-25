@@ -2,8 +2,9 @@
 
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from . import db
-from .models import Service, Provider
+from .models import Service, Provider, Order
 from flask_login import login_required, current_user
+from datetime import datetime
 
 
 main = Blueprint('main', __name__)
@@ -48,10 +49,32 @@ def providers():
 
 @main.route('/payment')
 def payment():
-
     return render_template('payment.html')
 
+@main.route('/order', methods=['POST'])
+def order():
+    date = request.form.get('date')
+    time=request.form.get('time')
+    date_time_str = date + ' ' + time
+    date = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M')
+    # date=datetime()
+    provider_id=request.args.get('provider_id')
+    service_id = request.args.get('service_id')
+    cost = request.args.get('cost')
+    description = request.args.get('description')
+    new_order = Order(provider_id=provider_id,service_id=service_id, userID=current_user.userID, cost=cost,  description=description, date=date)
+    db.session.add(new_order)
+    db.session.commit()
+    
+    print(date)
+    return render_template('order_confirmation.html')
 
+@main.route('/order_history')
+def order_history():
+    
+    orders = Order.query.all()
+    services = Service.query.all()
+    return render_template('order_history.html', orders=orders, services=services)
 
 @main.route('/profile')
 @login_required
