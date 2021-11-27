@@ -53,11 +53,11 @@
   }
   
   /* Rounded sliders */
-  .slider.round {
+  .slider.slider_round {
     border-radius: 34px;
   }
   
-  .slider.round:before {
+  .slider.slider_round:before {
     border-radius: 50%;
   }
 
@@ -121,7 +121,18 @@ p {
 }
 
 
-
+.shadow{
+  background-color: #eeeeee;
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px -10px rgba(67, 133, 144, 0.75);
+	color: #221a1a;
+	padding-top: 30px;
+	position: relative;
+	width: 60%;
+	max-width: 100%;
+	text-align: center;
+  margin:auto;
+}
 
 
 

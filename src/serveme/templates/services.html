@@ -2,31 +2,7 @@
 
 {% block content %}
 
-  <!-- {{result}} -->
-  <div class="container ">
-    <div class="columns  is-multiline is-variable is-5">
-{% for service in result %}
-  <div class="column is-3-tablet is-4-desktop">
-    <a href="{{ url_for('main.providers', provider_id=service.provider_id ,service_id=service.service_id) }}">
-        <div class="card">
-            
-            <div class="card-content">
-            <p>{{service.service_name}}</p>
-            <br>
-            <p>{{service.description}}</p>
-            
-            <hr> 
-            <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
-           {{service.rating_avg}}
-           <br>
-        
-            <p>Cost : ${{service.cost}}</p>   
-           
-            </div>
-        </div>
-    </a>
-    </div>
-{% endfor %}
+
 
 <div class="column is-8 is-offset-2">
     <h1 class ="title">
@@ -55,8 +31,37 @@
 	</div>
 </div>
 </div>
+
+<br>
+<br>
+
+
+  <!-- {{result}} -->
+  <div class="container ">
+    <div class="columns  is-multiline is-variable is-5">
+{% for service in result %}
+  <div class="column is-3-tablet is-4-desktop">
+    <a href="{{ url_for('main.providers', provider_id=service.provider_id ,service_id=service.service_id) }}">
+        <div class="card">
+            
+            <div class="card-content">
+            <p>{{service.service_name}}</p>
+            <br>
+            <p>{{service.description}}</p>
+            
+            <hr> 
+            <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
+           {{service.rating_avg}}
+           <br>
+        
+            <p>Cost : ${{service.cost}}</p>   
+           
+            </div>
+        </div>
+    </a>
+    </div>
+{% endfor %}
+
 </div>
-
-
 
 {% endblock %}

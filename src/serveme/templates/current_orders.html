@@ -12,7 +12,7 @@
    
       {%if order.provider_id==service.provider_id and order.service_id==service.service_id and service.provider_id == provider.provider_id%}
       <hr>
-    <div class="box" style="height:210px; margin:auto; width:50%">
+    <div class="box" style="height:230px; margin:auto; width:50%">
       <div style="display:flex; flex-direction: horizontal; justify-content: space-around;">
         <div><b>Order#</b> {{order.order_id}}</div>
         <div><b>When order will be delivered:</b> {{order.date}}</div>
@@ -30,6 +30,9 @@
             {{service.service_name}}
             <br>
             {{service.description}}
+            <br>
+            Order Status:
+            {{order.status}}
           </div>
           <br>
           <div style="margin-left:auto">

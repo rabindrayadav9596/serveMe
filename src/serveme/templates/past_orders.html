@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>
+
 <br>
  <b>Past Orders: </b>
   <br>
@@ -28,7 +28,16 @@
             {{service.service_name}}
             <br>
             {{service.description}}
+            <br>
+            Order status: {{order.status}}
+            {%if order.status == "Completed"%}
+            <img src="{{url_for('static', filename='completed.png')}}" alt="placeholder">
+            {%endif%}
+            {%if order.status == "Canceled"%}
+            <img src="{{url_for('static', filename='canceled.png')}}" alt="placeholder">
+            {%endif%}
           </div>
+         
         </div>
     </div>
         {%endif%}
@@ -36,5 +45,6 @@
       {%endfor%}
     {%endfor%}
    
-</h1>
+<br>
+<br>
 {% endblock %}
