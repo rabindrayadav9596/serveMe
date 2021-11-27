@@ -190,7 +190,11 @@ def change_service_status():
         order = Order.query.filter_by(order_id=orderID).first()
         order.status = "Canceled"
         db.session.commit()
-        
+    elif request.form.get('completeOrder') == "completeOrder":
+        order = Order.query.filter_by(order_id=orderID).first()
+        order.status = "Completed"
+        db.session.commit()
+ 
     provider = Provider.query.filter_by(userID = current_user.userID).first()
     provider_id = provider.provider_id
     orders = Order.query.filter_by(provider_id = provider_id).all()

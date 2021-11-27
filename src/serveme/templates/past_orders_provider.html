@@ -13,9 +13,10 @@
    
     {% for order in orders %}
      {% for service in services %}
-      {% if service.provider_id == order.provider_id %}
-      <hr>
+      {% if service.provider_id == order.provider_id and order.service_id == service.service_id %}
+     
       {%if order.status == "Canceled" or order.status == "Completed"%}
+      <hr>
     <div class="box" style="height:300px; margin:auto; width:50%">
       <div style="display:flex; flex-direction: horizontal; justify-content: space-around;">
         <div><b>Order#</b> {{order.order_id}}</div>
@@ -35,6 +36,12 @@
                 <br>
                 Order Status:
                 {{order.status}}
+                {%if order.status == "Completed"%}
+            <img src="{{url_for('static', filename='completed.png')}}" alt="placeholder">
+            {%endif%}
+            {%if order.status == "Canceled"%}
+            <img src="{{url_for('static', filename='canceled.png')}}" alt="placeholder">
+            {%endif%}
               </div>
               <br>
   

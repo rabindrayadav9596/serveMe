@@ -30,7 +30,7 @@ def login_post():
     if user.type == "customer":
         return redirect(url_for('main.profile'))
     else:
-        return redirect(url_for('main.provider_home'))
+        return redirect(url_for('main.provider_profile'))
 
 
 @auth.route('/signup')

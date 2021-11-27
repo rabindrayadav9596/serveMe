@@ -41,4 +41,7 @@ def create_app():
     from .search import search as search_blueprint
     app.register_blueprint(search_blueprint)
 
+    from .setting import setting as setting_blueprint
+    app.register_blueprint(setting_blueprint)
+
     return app
