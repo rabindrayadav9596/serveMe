@@ -1,33 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-8 is-offset-2">
-    <h1 class ="title">
-    </h1>
-	<div class="box">
-	    <form method="POST" action="/search">
-            <div class="field">
-                <div class="form-group">
-                    <input type="text" id="fname" name="fname" size="20" placeholder="Name">
-                    <input type="text" id="fname" name="fname" size="20" placeholder="Address">
-                    <select class =center large name = "stars" id="stars">
-                        <option value="" disabled selected>Rating</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                    <br>
-                    <br>
-                    <button class="button">Search</button>
-                   
-                </div>
-            </div>
-        </form>  
-	</div>
-</div>
-
 
   <!-- {{result}} -->
   <div class="container ">
@@ -54,6 +27,33 @@
     </a>
     </div>
 {% endfor %}
+
+<div class="column is-8 is-offset-2">
+    <h1 class ="title">
+    </h1>
+	<div class="box">
+	    <form method="POST" action="/search">
+            <div class="field">
+                <div class="form-group">
+                    <input type="text" id="fname" name="fname" size="20" placeholder="Name">
+                    <input type="text" id="fname" name="fname" size="20" placeholder="Address">
+                    <select class =center large name = "stars" id="stars">
+                        <option value="" disabled selected>Rating</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button class="button">Search</button>
+                   
+                </div>
+            </div>
+        </form>  
+	</div>
+</div>
 </div>
 </div>
 

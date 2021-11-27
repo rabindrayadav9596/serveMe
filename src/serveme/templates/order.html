@@ -7,7 +7,13 @@
 <br>
 <br>
 
-
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+         <div class="notification is-danger">
+        	{{ messages[0] }}
+         </div>
+    {% endif %}
+    {% endwith %}
 {%if providers != null%}
  <div style="display: flex; flex-direction: horizontal; margin-left:20%;">
     <div >
@@ -26,9 +32,7 @@
             <br>
         </div>
     </div>
-
-
-    <form method="POST" action="{{ url_for('main.order',cost=services[0].cost, provider_id=services[0].provider_id ,service_id=services[0].service_id, description=services[0].description) }}">
+    <form method="POST" action="{{ url_for('main.order',cost=services[0].cost, description=services[0].description, provider_id = provider_id, service_id=service_id) }}">
             <div style="display: flex; flex-direction: horizontal;">
 
                 <div class="box" style="margin-left:10%"> 

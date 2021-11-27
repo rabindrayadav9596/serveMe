@@ -1,16 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>
-  Welcome, {{ name }}!
-  <br>
+<br>
+<br>
+   <div class="is-size-1">
+       <b>Profile Page</b>
+   </div>
   <br>
   <hr>
 
-  <a href="{{ url_for('main.order_history' )}}">
-    <button class="button">Order History</button>
-    </a>
-  
+  <div class="card-container">
+    
+    <!-- <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" /> -->
+    <img class="round" src="{{url_for('static', filename='profile_pic.png')}}" alt="user">
+    <h3>{{ user.name }}</h3>
+    <h3>{{ user.email }}</h3>
+    <h3>Age: {{ user.age }}</h3>
+    <h3>Total Points</h3>
+    <div class="points">{{user.points}}</div>
+    <div class="circle center" >
+      <div class="dummy-element square"></div>
+      <div class="content" data-label={{user.points}}></div>
+    </div>
+  <br>
+    
+    
+    <div class="buttons">
+      <a href="{{ url_for('main.current_orders' )}}">
+        <button class="button is-primary">Current Order</button>
+      </a>
+     
+      <a href="{{ url_for('main.past_orders' )}}">
+        <button class="button is-primary" style="margin-left: 15px;">Past Order</button>
+      </a>
+    </div>
+   
 
-</h1>
+    <br>
+    <br>
+    <br>
+  </div>
+  
 {% endblock %}

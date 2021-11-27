@@ -25,11 +25,12 @@ class Order (db.Model):
     order_id        = db.Column(db.Integer, primary_key=True)
     provider_id     = db.Column(db.Integer, nullable=False)
     service_id      = db.Column(db.Integer, nullable=False)
-    userID         = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
+    userID          = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
     cost            = db.Column(db.Float(precision=2), nullable=False)
     review_id       = db.Column(db.Integer)
     description     = db.Column(db.String(255))
     date            = db.Column(db.DateTime())
+    status          = db.Column(db.String(255))
     
     def __repr__(self):
         return f'{self.order_id}-{self.provider_id}-{self.service_id}-{self.userID} - {self.cost} - {self.review_id} - {self.description} - {self.date} '
