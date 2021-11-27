@@ -35,7 +35,7 @@
     <form method="POST" action="{{ url_for('orderController.order',cost=0.08*services[0].cost + services[0].cost, description=services[0].description, provider_id = provider_id, service_id=service_id) }}">
             <div style="display: flex; flex-direction: horizontal;">
 
-                <div class="box" style="margin-left:10%"> 
+                <div class="box" style="margin-left:10%; padding:15%;"> 
                     <p>Choose date and time</p>
                    
                     <hr>
@@ -52,7 +52,20 @@
                         </div>
                     </div>
 
+                    <hr>
+                    <input type="checkbox" id="myCheck" />
+                Use bonus points
 
+                <div class="row" id="area" style="display: none;" >
+                    Total available points {{user.points}}
+                    <div class="field">
+                        <div class="control">
+                            <input type="number" name="points">
+                        </div>
+                    </div>
+                
+                </div>
+            
                 </div>
     
                 {% if services != null %}

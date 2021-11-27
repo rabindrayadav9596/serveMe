@@ -134,5 +134,9 @@ p {
   margin:auto;
 }
 
+#myCheck:checked + #area {
+  display: block !important;
+}
+
 
 

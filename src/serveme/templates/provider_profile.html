@@ -18,6 +18,14 @@
     <h3>Age: {{ user.age }}</h3>
     
   <br>
+
+  <div class="buttons">
+    <a href="{{ url_for('serviceController.view_services', userID = user.userID )}}">
+      <button class="button is-primary">Services</button>
+    </a>
+   
+   
+  </div>
     
     
     <div class="buttons">

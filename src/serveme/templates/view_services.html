@@ -1,0 +1,41 @@
+{% extends "provider_base.html" %}
+
+{% block content %}
+
+
+Service page
+<hr>
+{%for service in services%}
+
+<div class="column is-3-tablet is-4-desktop" style="margin:auto">
+    
+        <div class="card">
+            
+            <div class="card-content">
+            <p>{{service.service_name}}</p>
+            <br>
+            <p>{{service.description}}</p>
+            
+            <hr> 
+            <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
+           {{service.rating_avg}}
+           <br>
+        
+            <p>Cost : ${{service.cost}}</p>   
+           
+            </div>
+        </div>
+   
+    </div>
+
+
+{% endfor %}
+<br>
+<br>
+<a href="{{ url_for('serviceController.add_service' )}}">
+<button class="button" style="margin:auto">Add services</button>
+</a>
+
+
+
+{% endblock %}
