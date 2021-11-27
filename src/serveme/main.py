@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from . import db
-from .models import Service, Provider, Order
+from .models import User, Service, Provider, Order
 from flask_login import login_required, current_user
 from sqlalchemy import *
 import datetime
@@ -38,7 +38,7 @@ def services():
         result = Service.query.filter_by(category="Painting").all()
     elif service=='pest_control':
         result = Service.query.filter_by(category="Pest Control").all()
-    return render_template('services.html', result=result)
+    return render_template('services.html', result=result, serv = service)
 
 @main.route('/providers')
 def providers():
@@ -86,12 +86,12 @@ def order():
         db.session.add(new_order)
         db.session.commit()
         return render_template('order_confirmation.html')
-    return render_template('profile.html')
+    
 
 @main.route('/past_orders')
 def past_orders():
     currentDate = datetime.now()
-    orders = Order.query.filter(Order.status=="Completed", Order.userID==current_user.userID).all()    
+    orders = Order.query.filter(or_(Order.status == 'Completed', Order.status == "Canceled"), Order.userID==current_user.userID).all()    
     services = Service.query.all()
     providers = Provider.query.all()
     return render_template('past_orders.html', orders=orders, services=services, providers=providers)  
@@ -99,7 +99,7 @@ def past_orders():
 @main.route('/current_orders')
 def current_orders():
     currentDate = datetime.now()
-    orders = Order.query.filter(Order.status=="InProgress", Order.userID==current_user.userID).all()    
+    orders = Order.query.filter(or_(Order.status == 'InProgress', Order.status == "Accepted"), Order.userID==current_user.userID).all()    
     services = Service.query.all()
     providers = Provider.query.all()
     return render_template('current_orders.html', orders=orders, services=services, providers=providers)  
@@ -157,3 +157,57 @@ def settings():
 @login_required
 def profile():
     return render_template('profile.html', user=current_user)
+
+
+@main.route('/requested_orders_provider')
+@login_required
+def requested_orders_provider():
+    # users = Users.query.filter()
+    # provider_id = Provider.query.filter(Provider.userID == current_user.userID).first()
+    # orders = Order.query.filter( Order.provider_id==provider_id).all()    
+    # services = Service.query.all()
+    provider = Provider.query.filter_by(userID = current_user.userID).first()
+    provider_id = provider.provider_id
+    orders = Order.query.filter_by(provider_id = provider_id).all()
+    services = Service.query.filter_by(provider_id = provider_id )
+    return render_template('requested_orders_provider.html', provider = provider, user=current_user, orders = orders, services = services)
+
+
+@main.route('/provider_profile')
+@login_required
+def provider_profile():
+    return render_template('provider_profile.html', user=current_user)
+
+@main.route('/requested_orders_provider', methods=['POST'])
+@login_required
+def change_service_status():
+    orderID=request.args.get('orderID')
+    if request.form.get('acceptOrder') == 'acceptOrder':
+        order = Order.query.filter_by(order_id=orderID).first()
+        order.status = "Accepted"
+        db.session.commit()
+    elif request.form.get('cancelOrder') == "cancelOrder":
+        order = Order.query.filter_by(order_id=orderID).first()
+        order.status = "Canceled"
+        db.session.commit()
+        
+    provider = Provider.query.filter_by(userID = current_user.userID).first()
+    provider_id = provider.provider_id
+    orders = Order.query.filter_by(provider_id = provider_id).all()
+    services = Service.query.filter_by(provider_id = provider_id )
+    return redirect(url_for('main.requested_orders_provider',provider = provider, user=current_user, orders = orders, services = services))
+
+
+   
+@main.route('/past_orders_provider')
+@login_required
+def past_orders_provider():
+    provider = Provider.query.filter_by(userID = current_user.userID).first()
+    provider_id = provider.provider_id
+    orders = Order.query.filter_by(provider_id = provider_id).all()
+    services = Service.query.filter_by(provider_id = provider_id )
+    return render_template('past_orders_provider.html', provider = provider, user=current_user, orders = orders, services = services)
+
+
+
+

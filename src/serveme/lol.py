@@ -42,3 +42,5 @@ def profile():
     pastOrders= PastOrder.query.filter_by(userID=current_user.userID).all()
     #points= 
     return render_template('profile.html', name=current_user.name)
+
+

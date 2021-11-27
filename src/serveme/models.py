@@ -15,10 +15,11 @@ class User (UserMixin, db.Model):
     age             = db.Column(db.Integer, nullable=False)
     phoneNum    = db.Column(db.String(10), nullable=False)
     points     = db.Column(db.Integer, nullable=False)
+    type       = db.Column(db.String(10), nullable=False)
     #reviews         = db.relationship('Review', backref='author', lazy=True)
     
     def __repr__(self):
-        return 'String representation of user'
+        return f'{self.userID}-{self.email}-{self.name}-{self.password} - {self.gender} - {self.age} - {self.phoneNum} - {self.points} - {self.type} '
     
 
 class Order (db.Model):
@@ -44,11 +45,14 @@ class Review (db.Model):
     number_stars    = db.Column(db.Integer, nullable=False)
     
     def __repr__(self):
-        return 'String representation of Reviews'
+        return f'{self.review_id}-{self.userID}-{self.provider_id}-{self.review_text} - {self.date_posted} - {self.number_stars} '
 
 
 class Provider (db.Model):
+    def get_id(self):
+        return (self.provider_id)
     provider_id     = db.Column(db.Integer, primary_key=True)
+    userID        = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
     provider_name   = db.Column(db.String(50), nullable=False)
     rating_avg      = db.Column(db.Float)
     phone_number    = db.Column(db.String(10), nullable=False)

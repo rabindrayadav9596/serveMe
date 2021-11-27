@@ -1,0 +1,77 @@
+{% extends "provider_base.html" %}
+
+{% block content %}
+
+
+<h1>
+ <br>
+ <b>Requested Orders:</b>
+</h1>
+  <br>
+  
+    
+   
+    {% for order in orders %}
+     {% for service in services %}
+      {% if service.provider_id == order.provider_id %}
+      <hr>
+      {%if order.status == "InProgress" or order.status == "Accepted"%}
+    <div class="box" style="height:300px; margin:auto; width:50%">
+      <div style="display:flex; flex-direction: horizontal; justify-content: space-around;">
+        <div><b>Order#</b> {{order.order_id}}</div>
+        <div><b>Service requested for:</b> {{order.date}}</div>
+        <div><b>Total:</b> ${{order.cost}}</div>
+      </div>
+      
+      <hr>
+            <div>
+               
+            <br>
+                Service:
+                {{service.service_name}}
+                <br>
+                Description:
+                {{service.description}}
+                <br>
+                Order Status:
+                {{order.status}}
+              </div>
+              <br>
+  
+             
+              {% if order.status == "InProgress"%}
+          <form method="POST", action="{{ url_for('main.change_service_status',orderID=order.order_id)}}">
+	    
+          <div style="margin-left:auto">
+            <button type="submit" name="acceptOrder" value="acceptOrder" button class="button is-success">Accept </button>
+            <button type="submit" name="cancelOrder" value="cancelOrder" button class="button is-danger" style="margin-left: 25px;">Cancel </button>
+          </div>
+        
+          </form>
+          {%endif%}
+         
+
+         
+          {% if order.status == "Accepted"%}
+          <form method="POST", action="{{ url_for('main.change_service_status',orderID=order.order_id)}}">
+	    
+            <div style="margin-left:auto">
+              <button type="submit" name="completeOrder" value="completeOrder" button class="button is-success">Completed </button>
+              <button type="submit" name="cancelOrder" value="cancelOrder" button class="button is-danger" style="margin-left: 25px;">Cancel </button>
+            </div>
+          
+            </form>
+          {% endif %}
+
+         
+
+        </div>
+ 
+   
+        {%endif%}
+   
+    {%endif%}
+    {%endfor%}
+   {%endfor%}
+   <br>
+{% endblock %}
