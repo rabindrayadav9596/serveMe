@@ -2,9 +2,6 @@
 from flask import Blueprint, render_template
 
 
-
-
-
 setting = Blueprint('setting', __name__)
 
 

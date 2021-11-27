@@ -12,7 +12,7 @@
 	{% with messages = get_flashed_messages() %}
 	{% if messages %}
     		<div class="notification is-danger">
-        		{{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+        		{{ messages[0] }}. Go to <a href="{{ url_for('loginController.login') }}">login page</a>.
     		</div>
 	{% endif %}
 	{% endwith %}
@@ -76,11 +76,11 @@
 
     <div style=" display:flex; flex-direction: horizontal; margin-left:auto ">
        
-        <a href="{{ url_for('auth.login') }}">
+        <a href="{{ url_for('loginController.login') }}">
             <button class="button">Already have an account</button></a>
         
         <br>
-        <a href="{{ url_for('auth.signup') }}" > <button class="button" style="margin-left: 5px;">Sign up as a customer</button></a>
+        <a href="{{ url_for('registrationController.signup') }}" > <button class="button" style="margin-left: 5px;">Sign up as a customer</button></a>
       </div>
 </div>
 {% endblock %}

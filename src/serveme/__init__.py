@@ -31,8 +31,7 @@ def create_app():
         return User.query.get(str(user_id))
 
     # blueprint for auth routes in our app
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+   
 
     # blueprint for non-auth parts of app
     from .main import main as main_blueprint
@@ -43,5 +42,29 @@ def create_app():
 
     from .setting import setting as setting_blueprint
     app.register_blueprint(setting_blueprint)
+
+    from .paymentController import paymentController as paymentController_blueprint
+    app.register_blueprint(paymentController_blueprint)
+
+    from .registrationController import registrationController as registrationController_blueprint
+    app.register_blueprint(registrationController_blueprint)
+
+    from .loginController import loginController as loginController_blueprint
+    app.register_blueprint(loginController_blueprint)
+
+    from .logoutController import logoutController as logoutController_blueprint
+    app.register_blueprint(logoutController_blueprint)
+
+    from .serviceController import serviceController as serviceController_blueprint
+    app.register_blueprint(serviceController_blueprint)
+
+    from .providerController import providerController as providerController_blueprint
+    app.register_blueprint(providerController_blueprint)
+
+
+    from .orderController import orderController as orderController_blueprint
+    app.register_blueprint(orderController_blueprint)
+
+    
 
     return app

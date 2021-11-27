@@ -5,39 +5,13 @@ from .models import User, Provider
 from . import db
 import uuid
 
-auth = Blueprint('auth', __name__)
+registrationController = Blueprint('registrationController', __name__)
 
-@auth.route('/login')
-def login():
-    return render_template('login.html')
-
-@auth.route('/login', methods=['POST'])
-def login_post():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
-
-    user = User.query.filter_by(email=email).first()
-
-    # check if the user actually exists
-    # take the user-supplied password, hash it, and compare it to the hashed password in the database
-    if not user or not check_password_hash(user.password, password):
-        flash("User doesn't exist or password is incorrect" )
-        return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
-
-    # if the above check passes, then we know the user has the right credentials
-    login_user(user, remember=remember)
-    if user.type == "customer":
-        return redirect(url_for('main.profile'))
-    else:
-        return redirect(url_for('main.provider_profile'))
-
-
-@auth.route('/signup')
+@registrationController.route('/signup')
 def signup():
     return render_template('signup.html')
 
-@auth.route('/signup', methods=['POST'])
+@registrationController.route('/signup', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
@@ -51,7 +25,7 @@ def signup_post():
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
         flash('Email address already exists')
-        return redirect(url_for('auth.signup'))
+        return redirect(url_for('registrationController.signup'))
 
     # create a new user with the form data. Hash the password so the    plaintext version isn't saved.
     # gender=gender, age=age, phone_number=phone_number
@@ -61,19 +35,14 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
 
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('loginController.login'))
 
-@auth.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('main.index'))
 
-@auth.route('/service_provider_signup')
+@registrationController.route('/service_provider_signup')
 def service_provider_signup():
     return render_template('signup_service_provider.html')
 
-@auth.route('/service_provider_signup', methods=['POST'])
+@registrationController.route('/service_provider_signup', methods=['POST'])
 def service_provider_signup_post():
     email = request.form.get('email')
     provider_name = request.form.get('name')
@@ -100,10 +69,10 @@ def service_provider_signup_post():
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
-    return redirect(url_for('auth.create_provider', userID = userID, provider_name = provider_name, phone_number = phoneNum, address = address, email = email, ssn = ssn))
+    return redirect(url_for('registrationController.create_provider', userID = userID, provider_name = provider_name, phone_number = phoneNum, address = address, email = email, ssn = ssn))
     
 
-@auth.route('/create_provider')
+@registrationController.route('/create_provider')
 def create_provider():
     userID = request.args.get('userID')
     provider_name = request.args.get('provider_name')
@@ -115,5 +84,5 @@ def create_provider():
     provider = Provider( provider_name=provider_name, userID = userID, rating_avg = 3.0, phone_number = phone_number, address = address, email = email, ssn = ssn)
     db.session.add(provider)
     db.session.commit()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('loginController.login'))
 

@@ -41,7 +41,7 @@
   
              
               {% if order.status == "InProgress"%}
-          <form method="POST", action="{{ url_for('main.change_service_status',orderID=order.order_id)}}">
+          <form method="POST", action="{{ url_for('orderController.change_service_status',orderID=order.order_id)}}">
 	    
           <div style="margin-left:auto">
             <button type="submit" name="acceptOrder" value="acceptOrder" button class="button is-success">Accept </button>
@@ -54,7 +54,7 @@
 
          
           {% if order.status == "Accepted"%}
-          <form method="POST", action="{{ url_for('main.change_service_status',orderID=order.order_id)}}">
+          <form method="POST", action="{{ url_for('orderController.change_service_status',orderID=order.order_id)}}">
 	    
             <div style="margin-left:auto">
               <button type="submit" name="completeOrder" value="completeOrder" button class="button is-success">Completed </button>

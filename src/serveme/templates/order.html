@@ -32,7 +32,7 @@
             <br>
         </div>
     </div>
-    <form method="POST" action="{{ url_for('main.order',cost=0.08*services[0].cost + services[0].cost, description=services[0].description, provider_id = provider_id, service_id=service_id) }}">
+    <form method="POST" action="{{ url_for('orderController.order',cost=0.08*services[0].cost + services[0].cost, description=services[0].description, provider_id = provider_id, service_id=service_id) }}">
             <div style="display: flex; flex-direction: horizontal;">
 
                 <div class="box" style="margin-left:10%"> 

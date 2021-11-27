@@ -50,9 +50,9 @@
                            
 			    {% if not current_user.is_authenticated %}
                             <div class="buttons" style="margin-bottom: 1px;">
-                                <a href="{{ url_for('auth.login') }}" class="navbar-item button is-primary">
+                                <a href="{{ url_for('loginController.login') }}" class="navbar-item button is-primary">
                                     <strong>Login</strong>
-                                <a href="{{ url_for('auth.signup') }}" class="navbar-item button is-light">
+                                <a href="{{ url_for('registrationController.signup') }}" class="navbar-item button is-light">
                                     <strong>Sign Up</strong>
                                 </a>
                             </div>
@@ -62,7 +62,7 @@
 			    {% endif %}
 			    {% if current_user.is_authenticated %}
                            
-                                <a href="{{ url_for('auth.logout') }}" class="navbar-item ">
+                                <a href="{{ url_for('logoutController.logout') }}" class="navbar-item ">
                                     <img src="{{url_for('static', filename='logout.png')}}" width="28" height="28">
                                 </a>
                             </div>

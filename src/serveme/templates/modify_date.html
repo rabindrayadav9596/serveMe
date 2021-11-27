@@ -20,7 +20,7 @@
     		</div>
 	{% endif %}
 	{% endwith %}
-      <form class = "box" method="POST", action="{{url_for('main.modify_date', orderID=orderID)}}">
+      <form class = "box" method="POST", action="{{url_for('orderController.modify_date', orderID=orderID)}}">
 		    <br>	
 		    <h1><b>Choose date and time</b></h1>
                     <br>

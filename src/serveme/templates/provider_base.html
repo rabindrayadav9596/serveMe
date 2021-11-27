@@ -47,7 +47,7 @@
 			   
 			    {% if current_user.is_authenticated %}
                            
-                                <a href="{{ url_for('auth.logout') }}" class="navbar-item ">
+                                <a href="{{ url_for('logoutController.logout') }}" class="navbar-item ">
                                     <img src="{{url_for('static', filename='logout.png')}}" width="28" height="28">
                                 </a>
                             </div>

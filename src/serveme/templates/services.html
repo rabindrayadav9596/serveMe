@@ -42,7 +42,7 @@
       
 {% for service in result %}
   <div class="column is-3-tablet is-4-desktop">
-    <a href="{{ url_for('main.providers', provider_id=service.provider_id ,service_id=service.service_id) }}">
+    <a href="{{ url_for('providerController.providers', provider_id=service.provider_id ,service_id=service.service_id) }}">
         <div class="card">
             
             <div class="card-content">
