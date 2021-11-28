@@ -16,25 +16,75 @@ serviceController = Blueprint('serviceController', __name__)
 def services():
     result = "no data found"
     service= request.args.get('service');
-    if service=='appliances':
+    name = request.args.get('name')
+    address = request.args.get('address')
+    stars = request.args.get('stars')
+    providers = None
+    result = None
+    #if all name, address, and stars are null
+   
+    providers = Provider.query.all()
+
+    #if only name is present
+    if name and not address and not stars:
+        providers = Provider.query.filter(Provider.provider_name.like("%"+name+"%")).all()
+        
+    elif address and not name and not stars:
+        providers = Provider.query.filter(Provider.address.like("%"+address+"%")).all()
+
+    elif stars and not name and not address:
+        providers = Provider.query.filter(Provider.rating_avg > stars).all()
+    
+    elif name and address and not stars:
+        providers1 = Provider.query.filter(Provider.provider_name.like("%"+name+"%")).all()
+        providers2 = Provider.query.filter(Provider.address.like("%"+address+"%")).all()
+        providers = [provider for provider in providers1 if provider in providers2]
+
+    elif name and stars and not address:
+        providers1 = Provider.query.filter(Provider.provider_name.like("%"+name+"%")).all()
+        providers2 = Provider.query.filter(Provider.rating_avg > stars).all()
+        providers = [provider for provider in providers1 if provider in providers2]
+
+    elif stars and address and not name:
+        providers1 = Provider.query.filter(Provider.address.like("%"+address+"%")).all()
+        providers2 = Provider.query.filter(Provider.rating_avg > stars).all()
+        providers = [provider for provider in providers1 if provider in providers2]
+
+    elif name and stars and address:
+        providers1 = Provider.query.filter(Provider.provider_name.like("%"+name+"%")).all()
+        providers2 = Provider.query.filter(Provider.address.like("%"+address+"%")).all()
+        providers3 = Provider.query.filter(Provider.rating_avg > stars).all()
+        providers4 = [provider for provider in providers1 if provider in providers2]
+        providers = [provider for provider in providers3 if provider in providers4]
+
+
+    if service=='Appliances':
         result = Service.query.filter_by(category="Appliances").all()
-    elif service=='electrical':
+    elif service=='Electrical':
         result = Service.query.filter_by(category="Electrical").all()
-    elif service=='plumbing':
+    elif service=='Plumbing':
         result = Service.query.filter_by(category="Plumbing").all()
-    elif service=='cleaning':
+    elif service=='Cleaning':
         result = Service.query.filter_by(category="Cleaning").all()
-    elif service=='tutoring':
+    elif service=='Tutoring':
         result = Service.query.filter_by(category="Tutoring").all()
-    elif service=='moving':
+    elif service=='Moving':
         result = Service.query.filter_by(category="Moving").all()
-    elif service=='computer':
+    elif service=='Computer':
         result = Service.query.filter_by(category="Computer").all()
-    elif service=='painting':
+    elif service=='Painting':
         result = Service.query.filter_by(category="Painting").all()
-    elif service=='pest_control':
+    elif service=='Pest Control':
         result = Service.query.filter_by(category="Pest Control").all()
-    return render_template('services.html', result=result, serv = service)
+
+    
+    return render_template('services.html', result=result, providers = providers, service = service)
+    
+        
+        
+
+
+    
 
 @serviceController.route('/view_services')
 def view_services():

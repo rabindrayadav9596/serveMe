@@ -37,8 +37,7 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    from .search import search as search_blueprint
-    app.register_blueprint(search_blueprint)
+ 
 
     from .setting import setting as setting_blueprint
     app.register_blueprint(setting_blueprint)
@@ -64,6 +63,9 @@ def create_app():
 
     from .orderController import orderController as orderController_blueprint
     app.register_blueprint(orderController_blueprint)
+
+    from .searchController import searchController as searchController_blueprint
+    app.register_blueprint(searchController_blueprint)
 
     
 

@@ -3,16 +3,16 @@
 {% block content %}
 
 
-
+{{service}} Service Providers
 <div class="column is-8 is-offset-2">
     <h1 class ="title">
     </h1>
 	<div class="box">
-	    <form method="POST" action="/search">
+	    <form method="POST", action="{{url_for('searchController.searching_post', service = service)}}">
             <div class="field">
                 <div class="form-group">
-                    <input type="text" id="fname" name="fname" size="20" placeholder="Name">
-                    <input type="text" id="fname" name="fname" size="20" placeholder="Address">
+                    <input type="text" id="fname" name="name" size="20" placeholder="Name">
+                    <input type="text" id="fname" name="address" size="20" placeholder="Address">
                     <select class =center large name = "stars" id="stars">
                         <option value="" disabled selected>Rating</option>
                         <option>1</option>
@@ -35,24 +35,35 @@
 <br>
 <br>
 
-
   <!-- {{result}} -->
   <div class="container ">
     <div class="columns  is-multiline is-variable is-5">
       
+        <!-- {{result}} -->
 {% for service in result %}
+ {% for provider in providers %}
+  {%if provider.provider_id == service.provider_id%}
   <div class="column is-3-tablet is-4-desktop">
     <a href="{{ url_for('providerController.providers', provider_id=service.provider_id ,service_id=service.service_id) }}">
         <div class="card">
-            
+ 
             <div class="card-content">
-            <p>{{service.service_name}}</p>
-            <br>
-            <p>{{service.description}}</p>
+                Provider name : 
+                <b>{{provider.provider_name}}</b>
+                <br>
+                Provider address :
+                <b>{{provider.address}}</b>
+                <br>
+                Service name :
+                <b>{{service.service_name}}</b>
+                <br>
+                Service description:
+                <br>
+                <b>{{service.description}}</b>
             
             <hr> 
             <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
-           {{service.rating_avg}}
+           {{provider.rating_avg}}
            <br>
         
             <p>Cost : ${{service.cost}}</p>   
@@ -61,6 +72,8 @@
         </div>
     </a>
     </div>
+    {%endif%}
+    {% endfor %}
 {% endfor %}
 
 </div>

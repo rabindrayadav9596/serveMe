@@ -8,18 +8,22 @@ class User (UserMixin, db.Model):
     def get_id(self):
         return (self.userID)
     userID         = db.Column(db.String(50), primary_key=True)
-    email           = db.Column(db.String(50), nullable=False)
-    name            = db.Column(db.String(30), nullable=False)
-    password        = db.Column(db.String(100))
-    gender          = db.Column(db.String(20))
-    age             = db.Column(db.Integer, nullable=False)
-    phoneNum    = db.Column(db.String(10), nullable=False)
-    points     = db.Column(db.Integer, nullable=False)
-    type       = db.Column(db.String(10), nullable=False)
+    email          = db.Column(db.String(50), nullable=False)
+    name           = db.Column(db.String(30), nullable=False)
+    password       = db.Column(db.String(100))
+    gender         = db.Column(db.String(20))
+    age            = db.Column(db.Integer, nullable=False)
+    phoneNum       = db.Column(db.String(10), nullable=False)
+    points         = db.Column(db.Integer, nullable=False)
+    type           = db.Column(db.String(10), nullable=False)
+    
     #reviews         = db.relationship('Review', backref='author', lazy=True)
     
     def __repr__(self):
         return f'{self.userID}-{self.email}-{self.name}-{self.password} - {self.gender} - {self.age} - {self.phoneNum} - {self.points} - {self.type} '
+
+
+
     
 
 class Order (db.Model):
