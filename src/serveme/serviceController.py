@@ -33,7 +33,7 @@ def services():
         providers = Provider.query.filter(Provider.address.like("%"+address+"%")).all()
 
     elif stars and not name and not address:
-        providers = Provider.query.filter(Provider.rating_avg > stars).all()
+        providers = Provider.query.filter(Provider.rating_avg >= stars).all()
     
     elif name and address and not stars:
         providers1 = Provider.query.filter(Provider.provider_name.like("%"+name+"%")).all()
@@ -42,18 +42,18 @@ def services():
 
     elif name and stars and not address:
         providers1 = Provider.query.filter(Provider.provider_name.like("%"+name+"%")).all()
-        providers2 = Provider.query.filter(Provider.rating_avg > stars).all()
+        providers2 = Provider.query.filter(Provider.rating_avg >= stars).all()
         providers = [provider for provider in providers1 if provider in providers2]
 
     elif stars and address and not name:
         providers1 = Provider.query.filter(Provider.address.like("%"+address+"%")).all()
-        providers2 = Provider.query.filter(Provider.rating_avg > stars).all()
+        providers2 = Provider.query.filter(Provider.rating_avg >= stars).all()
         providers = [provider for provider in providers1 if provider in providers2]
 
     elif name and stars and address:
         providers1 = Provider.query.filter(Provider.provider_name.like("%"+name+"%")).all()
         providers2 = Provider.query.filter(Provider.address.like("%"+address+"%")).all()
-        providers3 = Provider.query.filter(Provider.rating_avg > stars).all()
+        providers3 = Provider.query.filter(Provider.rating_avg >= stars).all()
         providers4 = [provider for provider in providers1 if provider in providers2]
         providers = [provider for provider in providers3 if provider in providers4]
 
@@ -80,12 +80,6 @@ def services():
     
     return render_template('services.html', result=result, providers = providers, service = service)
     
-        
-        
-
-
-    
-
 @serviceController.route('/view_services')
 def view_services():
     

@@ -2,12 +2,11 @@
 
 {% block content %}
 
-
-<h1>
- <br>
- <b>Past Orders:</b>
-</h1>
-  <br>
+<br>
+<br>
+<div class="is-size-3">
+   <b>Past Orders:</b>
+</div>
   
     
    
@@ -17,7 +16,7 @@
      
       {%if order.status == "Canceled" or order.status == "Completed"%}
       <hr>
-    <div class="box" style="height:300px; margin:auto; width:50%">
+    <div class="box" style="height:200px; margin:auto; width:50%">
       <div style="display:flex; flex-direction: horizontal; justify-content: space-around;">
         <div><b>Order#</b> {{order.order_id}}</div>
         <div><b>Service requested for:</b> {{order.date}}</div>
@@ -26,24 +25,21 @@
       
       <hr>
             <div>
-               
-            <br>
-                Service:
+                <b>Service:</b>
                 {{service.service_name}}
                 <br>
-                Description:
+                <b>Description:</b>
                 {{service.description}}
                 <br>
-                Order Status:
+                <b>Order Status:</b>
                 {{order.status}}
                 {%if order.status == "Completed"%}
-            <img src="{{url_for('static', filename='completed.png')}}" alt="placeholder">
+            <img src="{{url_for('static', filename='completed.png')}}" alt="placeholder" style="margin-top: 5px">
             {%endif%}
             {%if order.status == "Canceled"%}
-            <img src="{{url_for('static', filename='canceled.png')}}" alt="placeholder">
+            <img src="{{url_for('static', filename='canceled.png')}}" alt="placeholder" style="margin-top: 5px">
             {%endif%}
               </div>
-              <br>
   
               
 
@@ -55,5 +51,4 @@
     {%endif%}
     {%endfor%}
    {%endfor%}
-   <br>
 {% endblock %}

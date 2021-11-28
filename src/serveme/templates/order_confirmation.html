@@ -1,20 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>
- Order Confirmation Page
-</h1><hr>
-
-
-
-
+    <br>
+    <br>
+    <div class="is-size-3">
+        <b>Confirmation Page</b>
+    </div>
+    <br>
   <div class="box" style="display: flex; justify-content: center; align-items: center;">
-     Yay! Order is placed. You got 100 points for the order
+    Order has been successfully placed. You got {{points}} points for this order
      If you want to modify your service date or cancel the order.
-     Please visit order history page.
+     Please visit the current order page through the link below.
      
   </div>
   <a href="{{ url_for('orderController.current_orders' )}}">
-  <button class="button">Current Orders</button>
+  <button class="button is-large is-success">Current Orders</button>
   </a>
 {% endblock %}

@@ -14,16 +14,13 @@ class User (UserMixin, db.Model):
     gender         = db.Column(db.String(20))
     age            = db.Column(db.Integer, nullable=False)
     phoneNum       = db.Column(db.String(10), nullable=False)
-    points         = db.Column(db.Integer, nullable=False)
+    points         = db.Column(db.Float(50), nullable=False)
     type           = db.Column(db.String(10), nullable=False)
-    
+    settings       = db.Column(db.String(5), nullable=False)
     #reviews         = db.relationship('Review', backref='author', lazy=True)
     
     def __repr__(self):
         return f'{self.userID}-{self.email}-{self.name}-{self.password} - {self.gender} - {self.age} - {self.phoneNum} - {self.points} - {self.type} '
-
-
-
     
 
 class Order (db.Model):
@@ -42,7 +39,7 @@ class Order (db.Model):
     
 class Review (db.Model):
     review_id       = db.Column(db.Integer, primary_key=True)
-    userID         = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
+    userID          = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
     provider_id     = db.Column(db.Integer, nullable=False)
     review_text     = db.Column(db.String(255), nullable=False)
     date_posted     = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -55,8 +52,9 @@ class Review (db.Model):
 class Provider (db.Model):
     def get_id(self):
         return (self.provider_id)
+        __searchable__  = ['provider_name', 'address']
     provider_id     = db.Column(db.Integer, primary_key=True)
-    userID        = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
+    userID          = db.Column(db.Integer, db.ForeignKey('user.userID'), nullable=False)
     provider_name   = db.Column(db.String(50), nullable=False)
     rating_avg      = db.Column(db.Float)
     phone_number    = db.Column(db.String(10), nullable=False)
@@ -71,7 +69,6 @@ class Provider (db.Model):
 
 # Different services that a provider has
 class Service (db.Model):
-    __searchable__  = ['description']
     provider_id     = db.Column(db.Integer, db.ForeignKey('provider.provider_id'), nullable=False)
     service_id      = db.Column(db.Integer, nullable=False, primary_key=True)
     rating_avg      = db.Column(db.Float(precision=2), nullable=False)

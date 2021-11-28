@@ -18,7 +18,8 @@ def index():
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', user=current_user)
+    points = round(current_user.points, 2)
+    return render_template('profile.html', user=current_user, points=points)
 
 @main.route('/provider_profile')
 @login_required

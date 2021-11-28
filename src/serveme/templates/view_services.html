@@ -1,31 +1,33 @@
 {% extends "provider_base.html" %}
 
 {% block content %}
-
-
-Service page
+<br>
+   <div class="is-size-3">
+       <b>Service page:</b>
+   </div>
 <hr>
 {%for service in services%}
 
 <div class="column is-3-tablet is-4-desktop" style="margin:auto">
-    
+    <a href="{{ url_for('providerController.providers', provider_id=service.provider_id ,service_id=service.service_id) }}">
         <div class="card">
             
             <div class="card-content">
-            <p>{{service.service_name}}</p>
+            <b>Name:</b> {{service.service_name}}
             <br>
-            <p>{{service.description}}</p>
+            <b>Description: </b>{{service.description}}
             
             <hr> 
+            <b>Average rating: </b>
+            {{service.rating_avg}}
             <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
-           {{service.rating_avg}}
            <br>
         
-            <p>Cost : ${{service.cost}}</p>   
+            <p><b>Cost :</b> ${{service.cost}}</p>   
            
             </div>
         </div>
-   
+    </a>
     </div>
 
 

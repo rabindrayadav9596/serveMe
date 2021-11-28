@@ -2,7 +2,11 @@
 
 {% block content %}
 
-
+<br>
+<br>
+<div class="is-size-2">
+       <b>Schedule service</b>
+   </div>
 
 <br>
 <br>
@@ -17,70 +21,67 @@
 {%if providers != null%}
  <div style="display: flex; flex-direction: horizontal; margin-left:20%;">
     <div >
-        <div class="box"> 
-            <h1>Provider description</h1>
+        <div class="box" style="text-align: left"> 
+	<div class="is-size-5">
+	<h1><strong>Provider description: </strong></h1>
+	</div>
             <hr>
-            <p style="text-align:center">Name : {{providers[0].provider_name}}</p>
+            <b>Name: </b>{{providers[0].provider_name}}</p>
             <br>
-            <p>Rating : {{providers[0].rating_avg}}</p>
+            <b>Average rating: </b>{{providers[0].rating_avg}}
+            <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
+	    <br>
             <br>
-            <p>Phone number :{{providers[0].phone_number}}</p>
+            <b>Phone number: </b>{{providers[0].phone_number}}
             <br>
-            <p>Address : {{providers[0].address}}</p>
             <br>
-            <p>Email : {{providers[0].email}}</p>
+            <b>Address: </b>{{providers[0].address}}</p>
+            <br>
+            <b>Email: </b>{{providers[0].email}}</p>
             <br>
         </div>
     </div>
-    <form method="POST" action="{{ url_for('orderController.order',cost=0.08*services[0].cost + services[0].cost, description=services[0].description, provider_id = provider_id, service_id=service_id) }}">
+    <form method="POST" action="{{ url_for('orderController.order',cost=discounted, description=services[0].description, provider_id = provider_id, service_id=service_id) }}">
             <div style="display: flex; flex-direction: horizontal;">
 
-                <div class="box" style="margin-left:10%; padding:15%;"> 
-                    <p>Choose date and time</p>
-                   
+                <div class="box" style="margin-left:10%; padding:15%"> 
+                   <div class="is-size-5">
+			<h1><strong>Choose date and time:</h1></strong>
+		   </div>
                     <hr>
                     <div class="field">
                         <div class="control">
-                            
-                            <input type="date" name="date">
+                            <input type="date" name="date" max="3000-12-31" required>
                         </div>
                     </div>
-    
+                <br>	
                     <div class="field">
                         <div class="control">
-                            <input type="time" name="time">
+                            <input type="time" name="time" required>
                         </div>
                     </div>
 
-                    <hr>
-                    <input type="checkbox" id="myCheck" />
-                Use bonus points
 
-                <div class="row" id="area" style="display: none;" >
-                    Total available points {{user.points}}
-                    <div class="field">
-                        <div class="control">
-                            <input type="number" name="points">
-                        </div>
-                    </div>
-                
-                </div>
-            
                 </div>
     
                 {% if services != null %}
-                <div  class="box" style="margin-left: 10%;" >
-                    <h1> <strong>Place Order</strong> </h1>
-                    <hr>
-                    <h1>Price summary</h1>
+                <div  class="box" style="margin-left: 10%;padding:15%" >
+                   <div class="is-size-5">
+			<h1><strong>Price summary: </strong></h1>
+		   </div>
                     <br>
-                    <p>Subtotal : ${{services[0].cost}}</p>
+                    <b>Subtotal: </b>${{cost}}
+		    <br>
                     <br>
-                    <p>Tax : ${{0.08 * services[0].cost}}</p>
+                    <b>Tax: </b>${{0.08 * cost}}
                     <br>
-                    <p>Total : ${{0.08*services[0].cost + services[0].cost}} </p>
+		    <br>
+                    <b>Total: </b>${{totalcost}}
+		    <br>
+		    <br>
+                    <b>Total using points: </b>${{discounted}}
                     <br>
-
+		    <br>
                     <button class="button is-success">Continue to checkout</button>
                     <br>      
                 </div>

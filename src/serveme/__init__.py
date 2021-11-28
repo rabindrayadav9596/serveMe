@@ -14,8 +14,8 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///serveme.db'
     app.config['DEBUG'] = True
-    #app.config['MSEARCH_BACKEND'] = 'whoosh'
-    #app.config['MSEARCH_ENABLE'] = True
+    app.config['MSEARCH_BACKEND'] = 'whoosh'
+    app.config['MSEARCH_ENABLE'] = True
 
     search2.init_app(app)
     db.init_app(app)
@@ -37,7 +37,8 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
- 
+    from .searchController import searchController as search_blueprint
+    app.register_blueprint(search_blueprint)
 
     from .setting import setting as setting_blueprint
     app.register_blueprint(setting_blueprint)
@@ -60,12 +61,8 @@ def create_app():
     from .providerController import providerController as providerController_blueprint
     app.register_blueprint(providerController_blueprint)
 
-
     from .orderController import orderController as orderController_blueprint
     app.register_blueprint(orderController_blueprint)
-
-    from .searchController import searchController as searchController_blueprint
-    app.register_blueprint(searchController_blueprint)
 
     
 

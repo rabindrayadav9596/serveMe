@@ -7,12 +7,10 @@ import datetime
 from datetime import datetime
 import pytz
 from dateutil.relativedelta import relativedelta
+import math
 
 
 orderController = Blueprint('orderController', __name__)
-
-
-
 
 
 @orderController.route('/order', methods=['POST'])
@@ -25,6 +23,10 @@ def order():
     date_time_str = date + ' ' + time
     date = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M')
     date = my_tz.localize(date)
+
+    points=current_user.points
+    settings = list(current_user.settings)
+    point_setting=settings[3]
 
     my_datetime = datetime.now()   
     current_dt = my_tz.localize(my_datetime)
@@ -43,16 +45,23 @@ def order():
         provider_id=request.args.get('provider_id')
         service_id = request.args.get('service_id')
         cost = request.args.get('cost')
+        addedPoints=float(cost)*0.05
+        if point_setting=="1":
+            cost=round(float(cost)-points, 2)
+            if float(cost)> points:
+                current_user.points=0
+            else:
+                current_user.points= round(points-cost, 2)   
+        current_user.points+=addedPoints
         description = request.args.get('description')
         new_order = Order(provider_id=provider_id,service_id=service_id, userID=current_user.userID, cost=cost,  description=description, date=date, status = "InProgress")
         db.session.add(new_order)
         db.session.commit()
-        return render_template('order_confirmation.html')
+        return render_template('order_confirmation.html',points=round(addedPoints,2))
     
 
 @orderController.route('/past_orders')
 def past_orders():
-    currentDate = datetime.now()
     orders = Order.query.filter(or_(Order.status == 'Completed', Order.status == "Canceled"), Order.userID==current_user.userID).all()    
     services = Service.query.all()
     providers = Provider.query.all()
@@ -60,7 +69,6 @@ def past_orders():
 
 @orderController.route('/current_orders')
 def current_orders():
-    currentDate = datetime.now()
     orders = Order.query.filter(or_(Order.status == 'InProgress', Order.status == "Accepted"), Order.userID==current_user.userID).all()    
     services = Service.query.all()
     providers = Provider.query.all()

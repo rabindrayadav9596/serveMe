@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ServeMe System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
-    
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-   
 </head>
 
 <body>
@@ -40,11 +38,8 @@
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
                                 <img src="{{url_for('static', filename='profile.png')}}" width="28" height="28">
                             </a>
-                            <!-- <a href="{{ url_for('search.searching') }}" class="navbar-item">
-                                <img src="{{url_for('static', filename='search.png')}}" width="28" height="28">
-                            </a> -->
 
-                            <a href="{{ url_for('setting.settings') }}" class="navbar-item">
+                            <a href="{{ url_for('setting.settings_retrieve') }}" class="navbar-item">
                                 <img src="{{url_for('static', filename='settings.png')}}" width="28" height="28">
                             </a>
 			    {% endif %}

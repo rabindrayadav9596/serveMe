@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br>
+<br>
+<div class="is-size-3">
+<b> {{service}} Service Providers</b>
+</div>
 
-
-{{service}} Service Providers
 <div class="column is-8 is-offset-2">
     <h1 class ="title">
     </h1>
 	<div class="box">
 	    <form method="POST", action="{{url_for('searchController.searching_post', service = service)}}">
             <div class="field">
-                <div class="form-group">
-                    <input type="text" id="fname" name="name" size="20" placeholder="Name">
-                    <input type="text" id="fname" name="address" size="20" placeholder="Address">
-                    <select class =center large name = "stars" id="stars">
+                <div class="columns is-centered">
+		<div class="column is-three-quarters">
+                    <input class="input is-medium" type="text" id="fname" name="name" size="20" placeholder="Name">
+                    <br>
+		    <br>
+		    <input class="input is-medium" type="text" id="fname" name="address" size="20" placeholder="Address">
+                </div>    
+		<div class="column">
+		<select class ="select is-medium is-info" name = "stars" id="stars">
                         <option value="" disabled selected>Rating</option>
                         <option>1</option>
                         <option>2</option>
@@ -23,15 +31,14 @@
                     </select>
                     <br>
                     <br>
-                    <button class="button">Search</button>
-                   
+                    <button class="button is-large is-primary">Search</button>
+                <div>   
                 </div>
             </div>
         </form>  
 	</div>
 </div>
 </div>
-
 <br>
 <br>
 
@@ -48,25 +55,26 @@
         <div class="card">
  
             <div class="card-content">
-                Provider name : 
-                <b>{{provider.provider_name}}</b>
+                <b>Provider name: </b> 
+                {{provider.provider_name}}
                 <br>
-                Provider address :
-                <b>{{provider.address}}</b>
+                <b>Provider address: </b>
+                {{provider.address}}
                 <br>
-                Service name :
-                <b>{{service.service_name}}</b>
+                <b>Service name: </b>
+                {{service.service_name}}
                 <br>
-                Service description:
+                <b>Service description: </b>
                 <br>
-                <b>{{service.description}}</b>
+                {{service.description}}
             
             <hr> 
+            <b>Average rating: </b>{{provider.rating_avg}}
             <img src="{{url_for('static', filename='star.png')}}" alt="placeholder" >
-           {{provider.rating_avg}}
+           
            <br>
         
-            <p>Cost : ${{service.cost}}</p>   
+            <b>Cost: </b>${{service.cost}}   
            
             </div>
         </div>

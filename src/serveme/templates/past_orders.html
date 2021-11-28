@@ -3,8 +3,11 @@
 {% block content %}
 
 <br>
- <b>Past Orders: </b>
-  <br>
+<br>
+ <div class="is-size-3">
+       <b>Past Orders:</b>
+   </div>
+
    {%for service in services%}
     {%for order in orders%}
      {%for provider in providers%}
@@ -12,25 +15,26 @@
       {%if order.provider_id==service.provider_id and order.service_id==service.service_id and service.provider_id == provider.provider_id%}
       <hr>	
       {%if order.status == "Canceled" or order.status == "Completed"%}
-    <div class="box" style="height:200px; margin:auto; width:50%">
+    <div class="box" style="height:220px; margin:auto; width:50%">
       <div style="display:flex; flex-direction: horizontal; justify-content: space-around;">
-        <div>order #: {{order.order_id}}</div>
-        <div>order placed for : {{order.date}}</div>
-        <div>total : ${{order.cost}}</div>
+        <div><b>Order# </b> {{order.order_id}}</div>
+        <div><b>Order placed for:</b> {{order.date}}</div>
+        <div><b>Total: </b>${{order.cost}}</div>
       </div>
       
       <hr>
         <div style="display: flex; flex-direction: horizontal; justify-content: center; ">
           <div>
-            Provider:
+            <b>Provider:</b>
             {{provider.provider_name}}
 	    <br>
-            Service:
+            <b>Service:</b>
             {{service.service_name}}
             <br>
+	    <b>Description: </b>
             {{service.description}}
             <br>
-            Order status: {{order.status}}
+            <b>Order status:</b> {{order.status}}
             {%if order.status == "Completed"%}
             <img src="{{url_for('static', filename='completed.png')}}" alt="placeholder">
             {%endif%}

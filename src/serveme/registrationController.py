@@ -21,7 +21,7 @@ def signup_post():
     phoneNum = request.form.get('phoneNum')
     userID= uuid.uuid4().hex
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
-    points = 1000
+    points = 0
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
         flash('Email address already exists')
