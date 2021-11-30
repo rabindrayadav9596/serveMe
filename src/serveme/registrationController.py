@@ -29,7 +29,7 @@ def signup_post():
 
     # create a new user with the form data. Hash the password so the    plaintext version isn't saved.
     # gender=gender, age=age, phone_number=phone_number
-    new_user = User( userID=userID, email=email, name=name, password=generate_password_hash(password, method='sha256'),gender=gender,age=age, phoneNum=phoneNum, points=points, type='customer')
+    new_user = User( userID=userID, email=email, name=name, password=generate_password_hash(password, method='sha256'),gender=gender,age=age, phoneNum=phoneNum, points=points, type='customer', settings="0001")
    
     # add the new user to the database
     db.session.add(new_user)
@@ -64,7 +64,7 @@ def service_provider_signup_post():
 
     # create a new user with the form data. Hash the password so the    plaintext version isn't saved.
     # gender=gender, age=age, phone_number=phone_number
-    new_user = User( userID=userID, email=email, name=provider_name, password=generate_password_hash(password, method='sha256'),gender=gender,age=age, phoneNum=phoneNum, points=points, type='provider')
+    new_user = User( userID=userID, email=email, name=provider_name, password=generate_password_hash(password, method='sha256'),gender=gender,age=age, phoneNum=phoneNum, points=points, type='provider',settings="0001")
     
     # add the new user to the database
     db.session.add(new_user)
